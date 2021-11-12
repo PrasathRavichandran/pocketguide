@@ -1,21 +1,21 @@
-import { StatusBar } from "expo-status-bar";
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
-import GettingStartedScreen from "./src/screens/GettingStarted";
+import { StatusBar } from "expo-status-bar";
+import { SafeAreaView, StyleSheet } from "react-native";
+
+import Navigation from "./src/routers/Navigation";
 import { colors } from "./src/themes/colors";
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <StatusBar style="auto" backgroundColor={colors.orange} />
-      <GettingStartedScreen />
-    </View>
+    <SafeAreaView style={styles.container}>
+      <StatusBar style={'dark'} backgroundColor={colors.orange} />
+      <Navigation />
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    paddingTop: 20, // this will be removed when navigation introduced
+    flex: 1
   },
 });
