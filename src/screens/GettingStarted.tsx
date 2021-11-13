@@ -46,10 +46,9 @@ const styles = StyleSheet.create({
     fontSize: 15,
     fontWeight: Platform.OS === "ios" ? "500" : "bold",
     paddingHorizontal: 20,
-    paddingTop: 30,
   },
   headingContainer: {
-    marginTop: 40,
+    marginTop: 36,
   },
   heading: {
     fontSize: 48,
@@ -66,7 +65,7 @@ const styles = StyleSheet.create({
     borderRadius: 14,
     justifyContent: "center",
     alignItems: "center",
-    marginTop: 24,
+    marginTop: 20,
     marginLeft: 20,
   },
   buttonText: {
