@@ -1,7 +1,13 @@
 import React from "react";
-import { Image } from "react-native";
+import { Image, ImageResizeMode, ImageSourcePropType } from "react-native";
 
-const CustomImage = ({ source, style, mode }: any) => {
+type Props = {
+  source: ImageSourcePropType;
+  style: any;
+  mode: ImageResizeMode;
+};
+
+const CustomImage = ({ source, style, mode }: Props) => {
   return <Image source={source} style={style} resizeMode={mode} />;
 };
 

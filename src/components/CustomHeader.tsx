@@ -2,8 +2,15 @@ import React from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 import { colors } from "../themes/colors";
+import { Header } from "../types/Header";
 
-const CustomHeader = ({ data, toggleActiveHeader, active }: any) => {
+type Props = {
+  data: Header[];
+  toggleActiveHeader: (item: Header) => void;
+  active: Header;
+};
+
+const CustomHeader = ({ data, toggleActiveHeader, active }: Props) => {
   return (
     <View
       style={{
