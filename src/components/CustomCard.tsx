@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
   innerCard: {
     maxWidth: "80%",
     height: "100%",
-    shadowColor: "#000",
+    shadowColor: colors.black,
     shadowOffset: {
       width: 2,
       height: 2,

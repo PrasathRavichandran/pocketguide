@@ -1,3 +1,4 @@
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import React from "react";
 import {
   Platform,
@@ -10,7 +11,9 @@ import CustomImage from "../components/CustomImage";
 import Layout from "../components/Layout";
 import { colors } from "../themes/colors";
 
-const GettingStartedScreen = () => {
+type Props = NativeStackScreenProps<RootStackParamsList, "gettingStarted">;
+
+const GettingStartedScreen = ({ navigation }: Props) => {
   return (
     <Layout customStyle={styles.container}>
       <Text style={styles.logoHeading}>
@@ -20,7 +23,11 @@ const GettingStartedScreen = () => {
         <Text style={styles.heading}>
           Find all about your next trip with Pocket Guide!
         </Text>
-        <TouchableOpacity style={styles.buttonContainer}>
+        <TouchableOpacity
+          style={styles.buttonContainer}
+          activeOpacity={0.5}
+          onPress={() => navigation.navigate("tab")}
+        >
           <Text style={styles.buttonText}>Get Started</Text>
         </TouchableOpacity>
       </View>

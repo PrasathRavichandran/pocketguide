@@ -58,6 +58,7 @@ const Home = () => {
         {/* List of card */}
         <FlatList
           data={ListData}
+          contentContainerStyle={{ paddingBottom: 50 }}
           keyExtractor={(_) => _.id}
           showsVerticalScrollIndicator={false}
           renderItem={({ item }) => <CustomCard item={item} />}

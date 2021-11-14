@@ -1,24 +1,28 @@
 import React from "react";
+
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 import GettingStartedScreen from "../screens/GettingStarted";
-import Home from "../screens/Home";
+import TabNavigation from "./TabNavigation";
 
 const RootStack = createNativeStackNavigator<RootStackParamsList>();
 
-const Navigation = () => {
+const RootStackNavigator = () => {
   return (
     <NavigationContainer>
-      <RootStack.Navigator initialRouteName={'home'} screenOptions={{ headerShown: false }}>
+      <RootStack.Navigator
+        initialRouteName={"gettingStarted"}
+        screenOptions={{ headerShown: false }}
+      >
         <RootStack.Screen
           name="gettingStarted"
           component={GettingStartedScreen}
         />
-        <RootStack.Screen name="home" component={Home} />
+        <RootStack.Screen name="tab" component={TabNavigation} />
       </RootStack.Navigator>
     </NavigationContainer>
   );
 };
 
-export default Navigation;
+export default RootStackNavigator;
