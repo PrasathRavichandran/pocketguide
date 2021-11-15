@@ -88,13 +88,13 @@ const styles = StyleSheet.create({
   },
 
   cardHeading: {
-    fontSize: 28,
+    fontSize: 24,
     fontWeight: "500",
     color: colors.black,
-    marginBottom: 10,
+    marginBottom: 5,
   },
   cardsubHeading: {
-    fontSize: 15,
+    fontSize: 14,
     fontWeight: "400",
     color: colors.gray,
     marginBottom: 5,

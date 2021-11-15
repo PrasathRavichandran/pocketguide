@@ -52,7 +52,6 @@ const CustomTabBar = ({ state, descriptors, navigation }: any) => {
                 styles.tabBarButtonText,
                 {
                   color: isFocused ? colors.white : colors.gray,
-                  opacity: isFocused ? 1 : 0.5,
                 },
               ]}
             >
@@ -89,6 +88,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     width: "100%",
+    height: 80,
     borderTopLeftRadius: 26,
     borderTopRightRadius: 26,
     paddingHorizontal: 30,
@@ -101,17 +101,17 @@ const styles = StyleSheet.create({
       height: 2,
     },
     shadowOpacity: 0.4,
-    shadowRadius: 5,
+    shadowRadius: 3,
   },
   tabBarButton: {
     borderRadius: 10,
     marginBottom: 32,
     marginTop: 14,
-    paddingVertical: 8,
-    paddingHorizontal: 14,
+    paddingVertical: 6,
+    paddingHorizontal: 12,
   },
   tabBarButtonText: {
     fontSize: 18,
-    fontWeight: "500",
+    fontWeight: "400",
   },
 });

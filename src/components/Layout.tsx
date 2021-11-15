@@ -1,5 +1,6 @@
 import React from "react";
 import { SafeAreaView, StyleSheet } from "react-native";
+import { colors } from "../themes/colors";
 
 const Layout = ({ children, customStyle }: any) => {
   return (
@@ -13,6 +14,7 @@ export default Layout;
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
+    backgroundColor: colors.white,
   },
 });

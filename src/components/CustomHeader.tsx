@@ -31,11 +31,10 @@ const CustomHeader = ({ data, toggleActiveHeader, active }: Props) => {
             style={[
               styles.headerTitle,
               active?.id === item?.id
-                ? { color: colors.black, transform: [{ scale: 1.08 }] }
+                ? { color: colors.black }
                 : {
                     color: colors.gray,
                     marginBottom: 13,
-                    transform: [{ scale: 1 }],
                   },
             ]}
           >
@@ -52,7 +51,7 @@ export default CustomHeader;
 
 const styles = StyleSheet.create({
   headerTitle: {
-    fontSize: 18,
+    fontSize: 16,
     fontWeight: "600",
   },
   activeIndicator: {

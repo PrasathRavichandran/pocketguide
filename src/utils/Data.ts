@@ -23,3 +23,30 @@ export const ListData: List[] = [
     image: require("../../assets/app/list3.png"),
   },
 ];
+
+export const ExploreListData: List[] = [
+  {
+    id: "1",
+    heading: "Niligiri",
+    description: "Niligiri Mountain Railway Line",
+    image: require("../../assets/app/explore_img_1.jpg"),
+  },
+  {
+    id: "2",
+    heading: "Catherine Falls",
+    description: "Catherine Water Fall",
+    image: require("../../assets/app/explore_img_2.jpg"),
+  },
+  {
+    id: "3",
+    heading: "Ooty Mountain",
+    description: "Ooty Niligiri Railway Line",
+    image: require("../../assets/app/explore_img_3.jpg"),
+  },
+  {
+    id: "4",
+    heading: "Ooty Tea",
+    description: "Kotagiri Ooty Tea Estate",
+    image: require("../../assets/app/explore_img_4.jpg"),
+  },
+];
