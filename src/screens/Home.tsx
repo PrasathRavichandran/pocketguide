@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { FlatList, StyleSheet, Text, View } from "react-native";
+import React, { useEffect, useRef, useState } from "react";
+import { Animated, FlatList, StyleSheet, Text, View } from "react-native";
 import CustomCard from "../components/CustomCard";
 
 import CustomHeader from "../components/CustomHeader";
@@ -21,6 +21,7 @@ const Home = () => {
 
   useEffect(() => {
     settingActiveHeader("1");
+    pageEnterAnimation();
   }, []);
 
   const settingActiveHeader = (id: string) => {
@@ -32,24 +33,64 @@ const Home = () => {
     settingActiveHeader(item?.id);
   };
 
+  const text1 = useRef(new Animated.Value(0)).current;
+  const text2 = useRef(new Animated.Value(0)).current;
+  const bookImag = useRef(new Animated.Value(0)).current;
+  const headerListAnimation = useRef(new Animated.Value(0)).current;
+
+  const pageEnterAnimation = () => {
+    text1.setValue(-300);
+    text2.setValue(-300);
+    bookImag.setValue(-400);
+    headerListAnimation.setValue(0);
+
+    let options = {
+      toValue: 1,
+      delay: 100,
+      useNativeDriver: true,
+    };
+
+    let springOptions = {
+      toValue: 1,
+      speed: 24,
+      bounciness: 10,
+      useNativeDriver: true,
+    };
+
+    Animated.sequence([
+      Animated.timing(text1, options),
+      Animated.timing(text2, options),
+      Animated.spring(bookImag, springOptions),
+      Animated.timing(headerListAnimation, options),
+    ]).start();
+  };
+
   return (
     <Layout>
       <View style={[styles.header, styles.padding]}>
         <View style={{ flex: 2 }}>
-          <Text style={styles.heading}>Hey Avneet</Text>
-          <Text style={styles.subheading}>
+          <Animated.Text
+            style={[styles.heading, { transform: [{ translateX: text1 }] }]}
+          >
+            Hey Avneet
+          </Animated.Text>
+          <Animated.Text
+            style={[styles.subheading, { transform: [{ translateX: text2 }] }]}
+          >
             Start Planning {"\n"}your trip today!
-          </Text>
+          </Animated.Text>
         </View>
-        <View style={{ flex: 1 }}>
+        <Animated.View
+          style={{ flex: 1, transform: [{ translateY: bookImag }] }}
+        >
           <CustomImage
             source={require("../../assets/app/notebook.png")}
             style={styles.image}
             mode={"cover"}
           />
-        </View>
+        </Animated.View>
       </View>
-      <View style={styles.body}>
+      <Animated.View style={[styles.body, { opacity: headerListAnimation }]}>
         <CustomHeader
           data={header}
           active={activeHeader as Header}
@@ -58,12 +99,14 @@ const Home = () => {
         {/* List of card */}
         <FlatList
           data={ListData}
-          contentContainerStyle={{ paddingBottom: 50 }}
+          contentContainerStyle={{
+            paddingBottom: 50,
+          }}
           keyExtractor={(_) => _.id}
           showsVerticalScrollIndicator={false}
           renderItem={({ item }) => <CustomCard item={item} />}
         />
-      </View>
+      </Animated.View>
     </Layout>
   );
 };
