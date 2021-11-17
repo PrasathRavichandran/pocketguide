@@ -46,7 +46,7 @@ const Home = () => {
 
     let options = {
       toValue: 1,
-      delay: 100,
+      duration: 300,
       useNativeDriver: true,
     };
 

@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
+  Animated,
   FlatList,
   Image,
   StyleSheet,
@@ -25,6 +26,7 @@ const Explore = () => {
 
   useEffect(() => {
     settingActiveHeader("2");
+    pageEnterAnimation();
   }, []);
 
   const settingActiveHeader = (id: string) => {
@@ -36,24 +38,54 @@ const Explore = () => {
     settingActiveHeader(item?.id);
   };
 
+  const icon = useRef(new Animated.Value(0)).current;
+  const text1 = useRef(new Animated.Value(0)).current;
+  const bikeImg = useRef(new Animated.Value(0)).current;
+  const listAnimation = useRef(new Animated.Value(0)).current;
+
+  const pageEnterAnimation = () => {
+    icon.setValue(-300);
+    text1.setValue(-500);
+    bikeImg.setValue(-800);
+    listAnimation.setValue(0);
+
+    let options = { toValue: 1, duration: 400, useNativeDriver: true };
+
+    Animated.sequence([
+      Animated.timing(icon, options),
+      Animated.timing(text1, options),
+      Animated.timing(bikeImg, options),
+      Animated.timing(listAnimation, options),
+    ]).start();
+  };
+
   return (
     <Layout>
       <View style={[styles.container, styles.padding]}>
         <TouchableOpacity style={styles.backArrow}>
-          <Ionicons name="chevron-back" size={32} color="black" />
+          <Animated.View style={{ transform: [{ translateX: icon }] }}>
+            <Ionicons name="chevron-back" size={32} color="black" />
+          </Animated.View>
         </TouchableOpacity>
-        <View style={styles.headingContainer}>
+        <Animated.View
+          style={[
+            styles.headingContainer,
+            { transform: [{ translateX: text1 }] },
+          ]}
+        >
           <Text style={styles.heading}>
             Explore{"\n"}the best{"\n"}of Kotagiri
           </Text>
-        </View>
-        <Image
+        </Animated.View>
+        <Animated.Image
           source={require("../../assets/app/explore.png")}
           resizeMode={"contain"}
-          style={styles.image}
+          style={[styles.image, { transform: [{ translateX: bikeImg }] }]}
         />
       </View>
-      <View style={{ flexDirection: "row", left: -18 }}>
+      <Animated.View
+        style={{ flexDirection: "row", left: -18, opacity: listAnimation }}
+      >
         <View style={{ marginTop: 24 }}>
           {header?.map((item) => {
             return (
@@ -101,7 +133,7 @@ const Explore = () => {
             )}
           />
         </View>
-      </View>
+      </Animated.View>
     </Layout>
   );
 };
