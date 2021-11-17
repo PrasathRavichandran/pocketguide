@@ -1,12 +1,14 @@
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import {
+  Animated,
   Platform,
+  Pressable,
   StyleSheet,
   Text,
-  TouchableOpacity,
   View,
 } from "react-native";
+
 import CustomImage from "../components/CustomImage";
 import Layout from "../components/Layout";
 import { colors } from "../themes/colors";
@@ -14,30 +16,75 @@ import { colors } from "../themes/colors";
 type Props = NativeStackScreenProps<RootStackParamsList, "gettingStarted">;
 
 const GettingStartedScreen = ({ navigation }: Props) => {
+  const text1 = useRef(new Animated.Value(0)).current;
+  const text2 = useRef(new Animated.Value(0)).current;
+  const btn = useRef(new Animated.Value(0)).current;
+
+  const banner = useRef(new Animated.Value(0)).current;
+
+  useEffect(() => {
+    pageEnterAnimation();
+  }, []);
+
+  const pageEnterAnimation = () => {
+    text1.setValue(-300);
+    text2.setValue(-500);
+    btn.setValue(-500);
+    banner.setValue(400);
+
+    let options = {
+      toValue: 1,
+      duration: 300,
+      useNativeDriver: true,
+    };
+
+    Animated.sequence([
+      Animated.timing(text1, options),
+      Animated.timing(text2, options),
+      Animated.timing(btn, options),
+      Animated.spring(banner, {
+        toValue: 1,
+        speed: 20,
+        bounciness: 12,
+        useNativeDriver: true,
+      }),
+    ]).start();
+  };
+
   return (
     <Layout customStyle={styles.container}>
-      <Text style={styles.logoHeading}>
+      <Animated.Text
+        style={[styles.logoHeading, { transform: [{ translateX: text1 }] }]}
+      >
         Pocket<Text style={{ color: colors.red }}>Guide</Text>
-      </Text>
+      </Animated.Text>
       <View style={styles.headingContainer}>
-        <Text style={styles.heading}>
-          Find all about your next trip with Pocket Guide!
-        </Text>
-        <TouchableOpacity
-          style={styles.buttonContainer}
-          activeOpacity={0.5}
-          onPress={() => navigation.navigate("tab")}
+        <Animated.Text
+          style={[styles.heading, { transform: [{ translateX: text2 }] }]}
         >
-          <Text style={styles.buttonText}>Get Started</Text>
-        </TouchableOpacity>
+          Find all about your next trip with Pocket Guide!
+        </Animated.Text>
+
+        <Pressable onPress={() => navigation.navigate("tab")}>
+          <Animated.View
+            style={[
+              styles.buttonContainer,
+              { transform: [{ translateX: btn }] },
+            ]}
+          >
+            <Text style={styles.buttonText}>Get Started</Text>
+          </Animated.View>
+        </Pressable>
       </View>
-      <View style={styles.imageContainer}>
+      <Animated.View
+        style={[styles.imageContainer, { transform: [{ translateY: banner }] }]}
+      >
         <CustomImage
           source={require("../../assets/app/intro.png")}
           style={styles.image}
           mode={"cover"}
         />
-      </View>
+      </Animated.View>
     </Layout>
   );
 };
